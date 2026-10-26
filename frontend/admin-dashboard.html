@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Robotrac HR | Dashboard</title>
+<link rel="icon" href="assets/favicon.png">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/admin.css">
+<script src="js/config.js" defer></script>
+<script src="js/api.js" defer></script>
+<script src="js/ui.js" defer></script>
+<script src="js/admin-common.js" defer></script>
+<script src="js/admin-dashboard.js" defer></script>
+</head>
+<body class="admin">
+<a class="visually-hidden" href="#main">Skip to content</a>
+<header class="admin-top">
+  <div class="inner">
+    <a class="admin-brand" href="admin-dashboard.html"><img class="brand-mark" src="assets/robotrac-mark.jpg" alt="Robotrac"><span>HR Console</span></a>
+    <nav class="admin-nav" aria-label="HR navigation">
+      <a href="admin-dashboard.html">Dashboard</a>
+      <a href="drive-management.html">Drives</a>
+      <a href="candidate-management.html">Candidates</a>
+      <a href="question-bank.html">Question Bank</a>
+      <a href="results-dashboard.html">Results</a>
+      <a href="audit-log.html">Audit Log</a>
+      <a href="admin-users.html">HR Users</a>
+    </nav>
+    <div class="admin-user"><span id="adminName"></span><button type="button" class="btn btn-secondary btn-sm" id="adminLogout">Log out</button></div>
+  </div>
+</header>
+<main class="admin-main" id="main">
+  <div class="page-head">
+    <div><h1>Overview</h1><p id="asOf">Live figures from the database.</p></div>
+    <div class="row"><a class="btn btn-primary" href="drive-management.html#new">New drive</a><button type="button" class="btn btn-secondary" id="refreshBtn">Refresh</button></div>
+  </div>
+  <div class="notice hidden" id="notice" role="alert"></div>
+  <div class="tiles" id="tiles" aria-live="polite"></div>
+  <section class="card card-pad">
+    <h2>Drive-wise summary</h2>
+    <p class="sub">Authorised candidates and attempt progress for every drive.</p>
+    <div class="table-wrap">
+      <table class="data">
+        <thead><tr><th scope="col">Drive</th><th scope="col">Status</th><th scope="col" class="num">Authorised</th><th scope="col" class="num">Not started</th><th scope="col" class="num">In progress</th><th scope="col" class="num">Completed</th><th scope="col">Links</th></tr></thead>
+        <tbody id="driveRows"><tr><td colspan="7" class="empty">Loading…</td></tr></tbody>
+      </table>
+    </div>
+  </section>
+</main>
+</body>
+</html>

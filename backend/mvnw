@@ -1,0 +1,25 @@
+#!/bin/sh
+# Robotrac Maven Wrapper for macOS/Linux (Windows users: use mvnw.cmd).
+# Downloads the Maven version named in .mvn/wrapper/maven-wrapper.properties once
+# into ~/.m2/wrapper/dists and runs it.
+set -e
+BASEDIR=$(cd "$(dirname "$0")" && pwd)
+PROPS="$BASEDIR/.mvn/wrapper/maven-wrapper.properties"
+DIST_URL=$(grep '^distributionUrl=' "$PROPS" | cut -d= -f2-)
+DIST_ZIP=$(basename "$DIST_URL")
+DIST_NAME=${DIST_ZIP%-bin.zip}
+DIST_ROOT="$HOME/.m2/wrapper/dists"
+MAVEN_HOME_DIR="$DIST_ROOT/$DIST_NAME"
+
+if [ ! -x "$MAVEN_HOME_DIR/bin/mvn" ]; then
+  echo "[mvnw] Downloading $DIST_URL"
+  mkdir -p "$DIST_ROOT"
+  TMP_ZIP=$(mktemp)
+  if command -v curl >/dev/null 2>&1; then curl -fsSL -o "$TMP_ZIP" "$DIST_URL"; else wget -q -O "$TMP_ZIP" "$DIST_URL"; fi
+  unzip -q -o "$TMP_ZIP" -d "$DIST_ROOT"
+  rm -f "$TMP_ZIP"
+  chmod +x "$MAVEN_HOME_DIR/bin/mvn"
+fi
+
+export MAVEN_PROJECTBASEDIR="$BASEDIR"
+exec "$MAVEN_HOME_DIR/bin/mvn" -f "$BASEDIR/pom.xml" "$@"

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Robotrac HR | Drives</title>
+<link rel="icon" href="assets/favicon.png">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/admin.css">
+<script src="js/config.js" defer></script>
+<script src="js/api.js" defer></script>
+<script src="js/ui.js" defer></script>
+<script src="js/admin-common.js" defer></script>
+<script src="js/drive-management.js" defer></script>
+</head>
+<body class="admin">
+<a class="visually-hidden" href="#main">Skip to content</a>
+<header class="admin-top">
+  <div class="inner">
+    <a class="admin-brand" href="admin-dashboard.html"><img class="brand-mark" src="assets/robotrac-mark.jpg" alt="Robotrac"><span>HR Console</span></a>
+    <nav class="admin-nav" aria-label="HR navigation">
+      <a href="admin-dashboard.html">Dashboard</a>
+      <a href="drive-management.html">Drives</a>
+      <a href="candidate-management.html">Candidates</a>
+      <a href="question-bank.html">Question Bank</a>
+      <a href="results-dashboard.html">Results</a>
+      <a href="audit-log.html">Audit Log</a>
+      <a href="admin-users.html">HR Users</a>
+    </nav>
+    <div class="admin-user"><span id="adminName"></span><button type="button" class="btn btn-secondary btn-sm" id="adminLogout">Log out</button></div>
+  </div>
+</header>
+<main class="admin-main" id="main">
+  <div class="page-head">
+    <div><h1>Recruitment drives</h1><p>Create a drive, check the question bank can supply it, authorise candidates, then activate it.</p></div>
+    <div class="row"><button type="button" class="btn btn-primary" id="newBtn">New drive</button></div>
+  </div>
+  <div class="notice hidden" id="notice" role="alert"></div>
+
+  <section class="card card-pad hidden" id="formCard" aria-labelledby="formTitle">
+    <h2 id="formTitle">New drive</h2>
+    <p class="sub" id="formSub">Times are in your computer's local time zone. The server stores them in UTC.</p>
+    <div class="notice warning hidden" id="lockedNote"></div>
+    <form id="driveForm" novalidate>
+      <div class="form-grid">
+        <div class="form-field"><label for="f-name">Drive name</label><input class="input" id="f-name" maxlength="150" required></div>
+        <div class="form-field"><label for="f-code">Drive code</label><input class="input mono" id="f-code" maxlength="20" required placeholder="RBT-2026-OCT"><span class="hint">4-20 letters, digits or hyphens. Shared with candidates.</span></div>
+        <div class="form-field full"><label for="f-desc">Description (shown to candidates)</label><input class="input" id="f-desc" maxlength="1000"></div>
+        <div class="form-field"><label for="f-start">Window opens</label><input class="input" id="f-start" type="datetime-local" required></div>
+        <div class="form-field"><label for="f-end">Window closes</label><input class="input" id="f-end" type="datetime-local" required><span class="hint">Candidates must start before this; nobody's deadline goes past it.</span></div>
+        <div class="form-field"><label for="f-duration">Duration (minutes)</label><input class="input" id="f-duration" type="number" min="5" max="300" value="40" required></div>
+        <div class="form-field"><label for="f-threshold">Leave-window warning threshold</label><input class="input" id="f-threshold" type="number" min="1" max="50" value="3"><span class="hint">Attempts at or above this count are highlighted for HR review.</span></div>
+        <div class="form-field"><label for="f-easy">Easy questions</label><input class="input mix" id="f-easy" type="number" min="0" max="100" value="5"></div>
+        <div class="form-field"><label for="f-moderate">Moderate questions</label><input class="input mix" id="f-moderate" type="number" min="0" max="100" value="15"></div>
+        <div class="form-field"><label for="f-hard">Hard questions</label><input class="input mix" id="f-hard" type="number" min="0" max="100" value="10"></div>
+        <div class="form-field"><label for="f-marks">Marks per correct answer</label><input class="input" id="f-marks" type="number" min="0.25" max="10" step="0.25" value="1"></div>
+        <div class="form-field"><span class="label">Options</span>
+          <label class="check"><input type="checkbox" id="f-balanced" class="mix" checked> Balance questions across the 3 sections</label>
+          <label class="check"><input type="checkbox" id="f-shuffle" checked> Shuffle option order per candidate</label>
+        </div>
+        <div class="form-field"><span class="label">Negative marking</span>
+          <label class="check"><input type="checkbox" id="f-negative"> Deduct marks for incorrect answers</label>
+          <input class="input" id="f-negmarks" type="number" min="0" max="10" step="0.25" value="0.25" disabled aria-label="Marks deducted per incorrect answer">
+        </div>
+        <div class="form-field full"><label for="f-password">Drive password <span class="muted" id="pwState"></span></label>
+          <div class="row"><input class="input mono" id="f-password" type="password" maxlength="64" autocomplete="new-password" placeholder="Leave empty to keep the current password">
+            <button type="button" class="btn btn-secondary btn-sm" id="genPw">Generate</button>
+            <button type="button" class="btn btn-ghost btn-sm" id="showPw" aria-pressed="false">Show</button></div>
+          <span class="hint">At least 8 characters with letters and digits. It is stored as a one-way hash, so copy it now to share with candidates — it cannot be displayed again.</span>
+        </div>
+      </div>
+      <div class="section-gap">
+        <h3 class="label">Question availability for this mix</h3>
+        <div id="availability" class="small muted">Checking…</div>
+      </div>
+      <div class="row section-gap">
+        <button type="submit" class="btn btn-primary" id="saveBtn">Save drive</button>
+        <button type="button" class="btn btn-secondary" id="cancelBtn">Cancel</button>
+      </div>
+      <div class="notice hidden section-gap" id="formNotice" role="alert"></div>
+    </form>
+  </section>
+
+  <section class="card card-pad section-gap" aria-labelledby="listTitle">
+    <h2 id="listTitle">All drives</h2>
+    <p class="sub">Lifecycle: Draft → Active (Scheduled / Live / Window ended) → Closed. Closing never deletes results.</p>
+    <div class="table-wrap">
+      <table class="data">
+        <thead><tr><th scope="col">Drive</th><th scope="col">Status</th><th scope="col">Window (local time)</th><th scope="col">Paper</th><th scope="col" class="num">Candidates</th><th scope="col" class="num">Started / done</th><th scope="col">Actions</th></tr></thead>
+        <tbody id="driveRows"><tr><td colspan="7" class="empty">Loading…</td></tr></tbody>
+      </table>
+    </div>
+  </section>
+</main>
+</body>
+</html>

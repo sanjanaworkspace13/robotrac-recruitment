@@ -1,0 +1,16 @@
+# Private local settings for YOUR computer.
+#
+# 1. Copy this file to   backend\config\application.properties   (same folder, without ".example").
+#    PowerShell:  Copy-Item config\application.properties.example config\application.properties
+# 2. Put the password you chose for the MySQL user robotrac_app below.
+#
+# Spring Boot automatically reads config\application.properties when you start the app from the
+# backend folder, and it overrides the defaults. The real file is listed in .gitignore, so your
+# password is never committed to Git.
+
+spring.datasource.username=robotrac_app
+spring.datasource.password=PUT-YOUR-DATABASE-PASSWORD-HERE
+
+# Optional overrides
+# server.port=8080
+# app.cors.allowed-origins=http://localhost:5500

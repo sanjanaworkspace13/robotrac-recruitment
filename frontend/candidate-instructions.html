@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Robotrac | Examination Instructions</title>
+<link rel="icon" href="assets/favicon.png">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/candidate.css">
+<script src="js/config.js" defer></script>
+<script src="js/api.js" defer></script>
+<script src="js/ui.js" defer></script>
+<script src="js/candidate-common.js" defer></script>
+<script src="js/candidate-instructions.js" defer></script>
+</head>
+<body>
+<header class="cand-header">
+  <div class="inner">
+    <div class="id">
+      <img class="brand-mark" src="assets/robotrac-mark.jpg" alt="Robotrac">
+      <div class="titles"><strong>Recruitment Assessment</strong><span id="hdrDrive">Loading…</span></div>
+    </div>
+    <div class="right">
+      <div class="who"><strong id="hdrEmail"></strong>Candidate</div>
+      <button type="button" class="btn btn-secondary btn-sm" id="logoutBtn">Log out</button>
+    </div>
+  </div>
+</header>
+
+<main class="page">
+  <div class="notice hidden" id="pageNotice" role="alert"></div>
+  <section class="card card-pad hidden" id="content" aria-labelledby="ititle">
+    <h1 id="ititle">Examination instructions</h1>
+    <p class="muted" id="driveDesc"></p>
+    <div class="accent"></div>
+
+    <div class="instr-grid" id="facts"></div>
+
+    <div class="rules">
+      <h3>Marking scheme</h3>
+      <ul id="marking"></ul>
+
+      <h3>Sections</h3>
+      <ul id="sections"></ul>
+
+      <h3>Answering and navigation</h3>
+      <ul>
+        <li>One question is shown at a time. Select an option, then press <strong>Save &amp; Next</strong> to save it. A selection is <strong>not saved</strong> until you press Save &amp; Next or Mark for Review &amp; Next.</li>
+        <li>You can change a saved answer at any time: open the question, choose another option and press Save &amp; Next again.</li>
+        <li><strong>Clear Response</strong> removes the saved answer of the current question.</li>
+        <li><strong>Previous</strong> and the numbered <strong>question palette</strong> let you move to any question. Moving away without saving discards an unsaved selection.</li>
+        <li>The message under the options tells you when the server has confirmed an answer ("Saved at …"). If your connection drops, the page retries and tells you clearly if an answer could not be saved.</li>
+      </ul>
+
+      <h3>Marking questions for review</h3>
+      <ul>
+        <li><strong>Mark for Review &amp; Next</strong> flags a question so you can return to it. If an option is selected, the answer is also saved.</li>
+        <li>Questions that are answered <em>and</em> marked for review <strong>are evaluated</strong>.</li>
+        <li>Palette colours:
+          <span class="legend-inline"><span class="badge">Not visited</span></span>
+          <span class="legend-inline"><span class="badge red">Not answered</span></span>
+          <span class="legend-inline"><span class="badge green">Answered</span></span>
+          <span class="legend-inline"><span class="badge purple">Marked for review</span></span>
+          <span class="legend-inline"><span class="badge purple">Answered &amp; marked</span></span>
+        </li>
+      </ul>
+
+      <h3>Time limit</h3>
+      <ul>
+        <li>The timer starts only when you press <strong>Start Examination</strong>. It is controlled by the server, so refreshing the page, closing the browser or changing your computer's clock does not stop or extend it.</li>
+        <li>When the time reaches zero, your test is submitted automatically. Only answers already saved on the server are counted.</li>
+        <li id="windowNote"></li>
+      </ul>
+
+      <h3>Leaving the examination window</h3>
+      <ul>
+        <li>Stay on this test tab until you submit. Switching to another tab or application, minimising the browser or leaving full-screen mode is <strong>recorded with the time</strong> and is visible to the HR team.</li>
+        <li>You will see a warning each time it happens. <span id="thresholdNote"></span></li>
+        <li>No camera, microphone or screen recording is used. Only these browser events are recorded.</li>
+      </ul>
+
+      <h3>One attempt only</h3>
+      <ul>
+        <li>You can take this test <strong>once</strong>. Once you press Start Examination your attempt has begun, even if you close the browser.</li>
+        <li>If you get disconnected, log in again with the same details to continue the <strong>same</strong> attempt with the remaining time.</li>
+        <li>After you submit, you will see a confirmation only. Scores are not shown to candidates; HR will contact you about next steps.</li>
+      </ul>
+    </div>
+
+    <div class="start-bar">
+      <label class="check"><input type="checkbox" id="ack"> <span>I have read and understood the instructions. I will not use unfair means and I understand that leaving the exam window is recorded.</span></label>
+      <div class="row">
+        <button type="button" class="btn btn-primary" id="startBtn" disabled>Start Examination</button>
+        <span class="small muted" id="startHint">Tick the box above to enable the Start button.</span>
+      </div>
+      <div class="notice hidden" id="startNotice" role="alert"></div>
+    </div>
+  </section>
+</main>
+</body>
+</html>

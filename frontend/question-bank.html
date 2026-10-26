@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Robotrac HR | Question Bank</title>
+<link rel="icon" href="assets/favicon.png">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/admin.css">
+<script src="js/config.js" defer></script>
+<script src="js/api.js" defer></script>
+<script src="js/ui.js" defer></script>
+<script src="js/admin-common.js" defer></script>
+<script src="js/question-bank.js" defer></script>
+</head>
+<body class="admin">
+<a class="visually-hidden" href="#main">Skip to content</a>
+<header class="admin-top">
+  <div class="inner">
+    <a class="admin-brand" href="admin-dashboard.html"><img class="brand-mark" src="assets/robotrac-mark.jpg" alt="Robotrac"><span>HR Console</span></a>
+    <nav class="admin-nav" aria-label="HR navigation">
+      <a href="admin-dashboard.html">Dashboard</a>
+      <a href="drive-management.html">Drives</a>
+      <a href="candidate-management.html">Candidates</a>
+      <a href="question-bank.html">Question Bank</a>
+      <a href="results-dashboard.html">Results</a>
+      <a href="audit-log.html">Audit Log</a>
+      <a href="admin-users.html">HR Users</a>
+    </nav>
+    <div class="admin-user"><span id="adminName"></span><button type="button" class="btn btn-secondary btn-sm" id="adminLogout">Log out</button></div>
+  </div>
+</header>
+<main class="admin-main" id="main">
+  <div class="page-head">
+    <div><h1>Question bank</h1><p>Imported from the HR workbook. Answer keys are visible only here, never to candidates.</p></div>
+  </div>
+  <div class="notice hidden" id="notice" role="alert"></div>
+  <div class="tiles" id="tiles"></div>
+  <div class="two-col">
+    <section class="card card-pad" aria-labelledby="mxTitle">
+      <h2 id="mxTitle">Eligible questions by section and difficulty</h2>
+      <p class="sub">Eligible = active, not flagged and with a valid answer key.</p>
+      <div class="table-wrap" id="matrix"></div>
+    </section>
+    <section class="card card-pad" aria-labelledby="impTitle">
+      <h2 id="impTitle">Import workbook</h2>
+      <p class="sub">Excel .xlsx with columns Question ID, Section, Difficulty, Question, Option A–D, Correct Option (Correct Answer, Explanation, Marks and HR Review Status are optional). Existing Question IDs are left unchanged.</p>
+      <div class="row"><input type="file" id="xlsxFile" accept=".xlsx,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" class="input"><button type="button" class="btn btn-primary" id="importBtn">Import</button></div>
+      <div class="notice hidden section-gap" id="importNotice" role="status"></div>
+      <div id="importRows" class="section-gap"></div>
+    </section>
+  </div>
+  <section class="card card-pad section-gap" aria-labelledby="qTitle">
+    <h2 id="qTitle">Questions</h2>
+    <div class="toolbar">
+      <div class="form-field"><label for="fSection">Section</label><select class="input" id="fSection"><option value="">All</option><option value="QUANTITATIVE">Quantitative Aptitude</option><option value="LOGICAL">Logical Reasoning</option><option value="ANALYTICAL">Analytical Thinking &amp; Problem-Solving</option></select></div>
+      <div class="form-field"><label for="fDifficulty">Difficulty</label><select class="input" id="fDifficulty"><option value="">All</option><option>EASY</option><option>MODERATE</option><option>HARD</option></select></div>
+      <div class="form-field"><label for="fStatus">Review status</label><select class="input" id="fStatus"><option value="">All</option><option value="NEEDS_REVIEW">Needs review</option><option value="APPROVED">Approved</option><option value="FLAGGED">Flagged</option></select></div>
+      <div class="form-field grow"><label for="fSearch">Search</label><input class="input" id="fSearch" type="search" placeholder="Question ID or text"></div>
+    </div>
+    <div class="table-wrap">
+      <table class="data">
+        <thead><tr><th scope="col">ID</th><th scope="col">Question</th><th scope="col">Section / level</th><th scope="col">Key</th><th scope="col">Status</th><th scope="col">Actions</th></tr></thead>
+        <tbody id="rows"><tr><td colspan="6" class="empty">Loading…</td></tr></tbody>
+      </table>
+    </div>
+    <div class="pager" id="pager"></div>
+  </section>
+
+  <dialog class="modal wide" id="editDlg" aria-labelledby="editTitle">
+    <form id="editForm" method="dialog" novalidate>
+      <div class="modal-head"><h2 id="editTitle">Edit question</h2></div>
+      <div class="modal-body">
+        <p class="small muted">Only questions never used in an attempt can be edited. After editing, the question returns to "Needs review".</p>
+        <div class="form-grid">
+          <div class="form-field full"><label for="e-text">Question</label><textarea class="input" id="e-text" maxlength="2000" required></textarea></div>
+          <div class="form-field"><label for="e-a">Option A</label><input class="input" id="e-a" maxlength="500" required></div>
+          <div class="form-field"><label for="e-b">Option B</label><input class="input" id="e-b" maxlength="500" required></div>
+          <div class="form-field"><label for="e-c">Option C</label><input class="input" id="e-c" maxlength="500" required></div>
+          <div class="form-field"><label for="e-d">Option D</label><input class="input" id="e-d" maxlength="500" required></div>
+          <div class="form-field"><label for="e-key">Correct option</label><select class="input" id="e-key"><option>A</option><option>B</option><option>C</option><option>D</option></select></div>
+          <div class="form-field full"><label for="e-expl">Explanation (HR only)</label><textarea class="input" id="e-expl" maxlength="2000"></textarea></div>
+        </div>
+        <div class="notice hidden section-gap" id="editNotice" role="alert"></div>
+      </div>
+      <div class="modal-foot"><button type="button" class="btn btn-secondary" id="editCancel">Cancel</button><button type="submit" class="btn btn-primary" id="editSave">Save changes</button></div>
+    </form>
+  </dialog>
+</main>
+</body>
+</html>

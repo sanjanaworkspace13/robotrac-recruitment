@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Robotrac HR | Results</title>
+<link rel="icon" href="assets/favicon.png">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/admin.css">
+<script src="js/config.js" defer></script>
+<script src="js/api.js" defer></script>
+<script src="js/ui.js" defer></script>
+<script src="js/admin-common.js" defer></script>
+<script src="js/results-dashboard.js" defer></script>
+</head>
+<body class="admin">
+<a class="visually-hidden" href="#main">Skip to content</a>
+<header class="admin-top">
+  <div class="inner">
+    <a class="admin-brand" href="admin-dashboard.html"><img class="brand-mark" src="assets/robotrac-mark.jpg" alt="Robotrac"><span>HR Console</span></a>
+    <nav class="admin-nav" aria-label="HR navigation">
+      <a href="admin-dashboard.html">Dashboard</a>
+      <a href="drive-management.html">Drives</a>
+      <a href="candidate-management.html">Candidates</a>
+      <a href="question-bank.html">Question Bank</a>
+      <a href="results-dashboard.html">Results</a>
+      <a href="audit-log.html">Audit Log</a>
+      <a href="admin-users.html">HR Users</a>
+    </nav>
+    <div class="admin-user"><span id="adminName"></span><button type="button" class="btn btn-secondary btn-sm" id="adminLogout">Log out</button></div>
+  </div>
+</header>
+<main class="admin-main" id="main">
+  <div class="page-head">
+    <div><h1>Results &amp; exam integrity</h1><p>Scores are calculated on the server. Leave-window events are evidence for review, not verdicts.</p></div>
+    <div class="row"><button type="button" class="btn btn-secondary" id="exportBtn">Export CSV</button></div>
+  </div>
+  <div class="notice hidden" id="notice" role="alert"></div>
+  <section class="card card-pad">
+    <div class="toolbar">
+      <div class="form-field"><label for="driveSel">Drive</label><select class="input" id="driveSel"></select></div>
+      <div class="form-field"><label for="statusSel">Status</label><select class="input" id="statusSel"><option value="">All</option><option value="IN_PROGRESS">In progress</option><option value="SUBMITTED">Submitted</option><option value="TIMED_OUT">Timed out</option></select></div>
+      <div class="form-field grow"><label for="search">Search</label><input class="input" id="search" type="search" placeholder="Candidate email or name"></div>
+      <div class="form-field"><label for="sortSel">Sort by</label><select class="input" id="sortSel"><option value="startedAt">Start time</option><option value="submittedAt">Submit time</option><option value="score">Score</option><option value="email">Email</option><option value="drive">Drive</option><option value="status">Status</option></select></div>
+      <div class="form-field"><label for="dirSel">Order</label><select class="input" id="dirSel"><option value="desc">Descending</option><option value="asc">Ascending</option></select></div>
+    </div>
+    <div class="table-wrap">
+      <table class="data">
+        <thead><tr><th scope="col">Candidate</th><th scope="col">Drive</th><th scope="col">Status</th><th scope="col" class="num">Score</th><th scope="col" class="num">Correct / wrong / blank</th><th scope="col" class="num">Left window</th><th scope="col">Submitted</th><th scope="col">HR review</th><th scope="col"></th></tr></thead>
+        <tbody id="rows"><tr><td colspan="9" class="empty">Loading…</td></tr></tbody>
+      </table>
+    </div>
+    <div class="pager" id="pager"></div>
+  </section>
+
+  <dialog class="modal wide" id="detailDlg" aria-labelledby="detailTitle">
+    <div class="modal-head"><h2 id="detailTitle">Attempt details</h2></div>
+    <div class="modal-body" id="detailBody"></div>
+    <div class="modal-foot"><button type="button" class="btn btn-secondary" id="detailClose">Close</button></div>
+  </dialog>
+</main>
+</body>
+</html>

@@ -1,0 +1,6 @@
+{
+  "java.configuration.updateBuildConfiguration": "automatic",
+  "java.compile.nullAnalysis.mode": "disabled",
+  "files.eol": "\n",
+  "[bat]": { "files.eol": "\r\n" }
+}

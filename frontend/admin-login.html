@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Robotrac | HR Login</title>
+<link rel="icon" href="assets/favicon.png">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/login.css">
+<script src="js/config.js" defer></script>
+<script src="js/api.js" defer></script>
+<script src="js/ui.js" defer></script>
+<script src="js/admin-login.js" defer></script>
+</head>
+<body class="auth-page">
+<main class="shell">
+  <div class="brand"><img alt="Robotrac — Electric | Robotic | Autonomous" src="assets/robotrac-logo.jpg"></div>
+  <section class="card auth-card" aria-labelledby="page-title">
+    <h1 id="page-title">HR Login</h1>
+    <p class="subtitle">Robotrac Recruitment Console</p>
+    <div class="accent"></div>
+    <form id="loginForm" novalidate>
+      <div class="field">
+        <label for="username">Username</label>
+        <div class="input-wrap"><span class="icon" aria-hidden="true">☺</span><input id="username" name="username" type="text" placeholder="Enter your username" autocomplete="username" maxlength="60" required></div>
+      </div>
+      <div class="field">
+        <label for="password">Password</label>
+        <div class="input-wrap"><span class="icon" aria-hidden="true">▣</span><input id="password" name="password" type="password" placeholder="Enter your password" autocomplete="current-password" maxlength="128" required><button class="toggle" type="button" id="toggle" aria-controls="password" aria-pressed="false" aria-label="Show password">SHOW</button></div>
+      </div>
+      <button class="submit" type="submit" id="submitBtn">Log in <span aria-hidden="true">→</span></button>
+      <div class="notice hidden" id="notice" role="alert"></div>
+    </form>
+    <div class="footer"><strong>HR and administrators only</strong> &nbsp; | &nbsp; <a href="candidate-login.html">Candidate login</a> &nbsp; | &nbsp; <a href="admin-setup.html" id="setupLink" class="hidden">First-time setup</a></div>
+  </section>
+</main>
+</body>
+</html>

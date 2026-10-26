@@ -1,0 +1,20 @@
+# Build output
+backend/target/
+*.class
+
+# Private local configuration (contains your database password) - NEVER commit
+backend/config/application.properties
+backend/config/*.local.properties
+.env
+
+# IDE / OS
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+.idea/
+*.iml
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Robotrac | Candidate Login</title>
+<link rel="icon" href="assets/favicon.png">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/login.css">
+<script src="js/config.js" defer></script>
+<script src="js/api.js" defer></script>
+<script src="js/ui.js" defer></script>
+<script src="js/candidate-login.js" defer></script>
+</head>
+<body class="auth-page">
+<main class="shell">
+  <div class="brand"><img alt="Robotrac — Electric | Robotic | Autonomous" src="assets/robotrac-logo.jpg"></div>
+  <section class="card auth-card" aria-labelledby="page-title">
+    <h1 id="page-title">Candidate Login</h1>
+    <p class="subtitle">Robotrac Recruitment Assessment</p>
+    <div class="accent"></div>
+    <form id="loginForm" novalidate>
+      <div class="field">
+        <label for="email">Registered Email ID</label>
+        <div class="input-wrap"><span class="icon" aria-hidden="true">✉</span><input id="email" name="email" type="email" placeholder="Enter your registered email ID" autocomplete="email" maxlength="254" required aria-describedby="email-error"></div>
+        <div class="field-error" id="email-error" aria-live="polite"></div>
+      </div>
+      <div class="field">
+        <label for="driveCode">Drive Code</label>
+        <div class="input-wrap"><span class="icon" aria-hidden="true">♧</span><input id="driveCode" name="driveCode" type="text" placeholder="Enter drive code" autocomplete="off" autocapitalize="characters" spellcheck="false" maxlength="20" required aria-describedby="code-error"></div>
+        <div class="field-error" id="code-error" aria-live="polite"></div>
+      </div>
+      <div class="field">
+        <label for="drivePassword">Drive Password</label>
+        <div class="input-wrap"><span class="icon" aria-hidden="true">▣</span><input id="drivePassword" name="drivePassword" type="password" placeholder="Enter drive password" autocomplete="current-password" maxlength="64" required aria-describedby="password-error"><button class="toggle" type="button" id="toggle" aria-controls="drivePassword" aria-pressed="false" aria-label="Show password">SHOW</button></div>
+        <div class="field-error" id="password-error" aria-live="polite"></div>
+      </div>
+      <button class="submit" type="submit" id="submitBtn">Continue <span aria-hidden="true">→</span></button>
+      <div class="notice hidden" id="notice" role="alert"></div>
+    </form>
+    <div class="footer"><strong>Authorised candidates only</strong> &nbsp; | &nbsp; Candidate results are not displayed here</div>
+  </section>
+</main>
+</body>
+</html>

@@ -1,0 +1,75 @@
+/* =====================================================================
+   Candidate / HR login and setup pages.
+   The rules below are taken from the supplied reference
+   Robotrac_Light_Candidate_Login.html (same sizes, spacing and colours),
+   moved into a stylesheet. Additions are marked "added".
+   ===================================================================== */
+body.auth-page {
+  min-height: 100vh;
+  display: flex; justify-content: center; align-items: center;
+  padding: 28px 16px; position: relative; overflow-x: hidden;
+}
+body.auth-page:before, body.auth-page:after {
+  content: ""; position: fixed; pointer-events: none;
+  width: 360px; height: 360px;
+  border: 1px solid rgba(128, 191, 60, .25);
+  transform: rotate(45deg); z-index: -1;
+}
+body.auth-page:before { left: -245px; top: 35%; background: linear-gradient(135deg, rgba(128, 191, 60, .05), transparent 65%); }
+body.auth-page:after { right: -255px; bottom: 5%; background: linear-gradient(135deg, rgba(128, 191, 60, .04), transparent 65%); }
+
+.shell { width: min(100%, 560px); }
+.brand { display: flex; justify-content: center; margin: 0 auto 22px; }
+.brand img { width: min(300px, 75vw); height: 155px; object-fit: contain; object-position: center; mix-blend-mode: multiply; }
+
+.auth-card { padding: 36px 42px 28px; }
+.auth-card h1 { font-size: 32px; line-height: 1.15; text-align: center; margin: 0 0 8px; letter-spacing: -.8px; font-weight: 700; color: #202832; }
+.auth-card .subtitle { text-align: center; color: var(--muted); font-size: 16px; margin: 0; }
+.auth-card .accent { margin: 20px auto 28px; }
+
+.field { margin-bottom: 20px; }
+.field > label { display: block; font-size: 14px; font-weight: 650; margin-bottom: 8px; color: #303740; }
+.input-wrap { position: relative; }
+.input-wrap .icon { position: absolute; left: 15px; top: 50%; transform: translateY(-50%); color: #687380; font-size: 17px; pointer-events: none; }
+.input-wrap input {
+  width: 100%; height: 52px;
+  border: 1px solid var(--line); border-radius: 10px; background: #fff;
+  padding: 0 48px 0 44px; font-size: 15px; color: #242b33; outline: none;
+  font-family: inherit;
+  transition: border-color .15s, box-shadow .15s;
+}
+.input-wrap input::placeholder { color: #9aa1aa; }
+.input-wrap input:focus { border-color: var(--green); box-shadow: 0 0 0 3px rgba(128, 191, 60, .13); }
+.input-wrap input[aria-invalid="true"] { border-color: var(--red); }                 /* added */
+.toggle {
+  position: absolute; right: 12px; top: 50%; transform: translateY(-50%);
+  border: 0; background: transparent; color: #647080; cursor: pointer;
+  font-size: 12px; font-weight: 700; padding: 6px; font-family: inherit;
+}
+.toggle:hover { color: var(--green-dark); }
+.field .field-error { margin-top: 6px; }                                            /* added */
+
+.submit {
+  width: 100%; height: 53px; border: 0; border-radius: 10px;
+  background: var(--green); color: white; font-size: 16px; font-weight: 700;
+  cursor: pointer; margin-top: 4px; font-family: inherit;
+  display: flex; align-items: center; justify-content: center; gap: 10px;
+  transition: background .15s, transform .15s;
+}
+.submit:hover:not(:disabled) { background: var(--green-dark); transform: translateY(-1px); }
+.submit:disabled { opacity: .7; cursor: progress; transform: none; }                 /* added */
+
+.auth-card .notice { margin-top: 14px; }
+.auth-card .footer {
+  border-top: 1px solid #edf0ed; margin-top: 26px; padding-top: 17px;
+  text-align: center; color: #818995; font-size: 12px; line-height: 1.6;
+}
+.auth-card .footer strong { font-weight: 600; color: #646d78; }
+.auth-card .footer a { color: #646d78; }
+
+@media (max-width: 500px) {
+  .auth-card { padding: 28px 21px 23px; }
+  .brand img { height: 130px; }
+  .auth-card h1 { font-size: 27px; }
+  .auth-card .subtitle { font-size: 14px; }
+}

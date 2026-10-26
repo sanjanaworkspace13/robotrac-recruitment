@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Robotrac | Examination</title>
+<link rel="icon" href="assets/favicon.png">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/candidate.css">
+<script src="js/config.js" defer></script>
+<script src="js/api.js" defer></script>
+<script src="js/ui.js" defer></script>
+<script src="js/candidate-common.js" defer></script>
+<script src="js/exam-monitor.js" defer></script>
+<script src="js/candidate-exam.js" defer></script>
+</head>
+<body>
+<header class="cand-header">
+  <div class="inner">
+    <div class="id">
+      <img class="brand-mark" src="assets/robotrac-mark.jpg" alt="Robotrac">
+      <div class="titles"><strong>Recruitment Assessment</strong><span id="hdrDrive">Loading…</span></div>
+    </div>
+    <div class="right">
+      <div class="who"><strong id="hdrEmail"></strong>Candidate</div>
+      <button type="button" class="btn btn-secondary btn-sm" id="fullscreenBtn">Full screen</button>
+      <div class="timer" id="timer" role="timer" aria-live="off" aria-label="Time remaining">
+        <span class="label">Time left</span>
+        <span class="value" id="timerValue">--:--</span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="banner hidden" id="awayBanner">
+  <div class="notice warning" role="alert">
+    <span id="awayText"></span>
+    <button type="button" class="btn btn-secondary btn-sm" id="awayDismiss">I understand</button>
+  </div>
+</div>
+<div class="banner hidden" id="connBanner">
+  <div class="notice error" role="alert"><span id="connText"></span></div>
+</div>
+<p class="visually-hidden" id="srTime" aria-live="polite"></p>
+
+<main class="exam hidden" id="exam">
+  <section class="card qpanel" aria-labelledby="qno">
+    <div class="qhead">
+      <span class="qno" id="qno">Question</span>
+      <span class="badge blue" id="qsection"></span>
+    </div>
+    <p class="qtext" id="qtext"></p>
+    <fieldset class="options" id="options">
+      <legend class="visually-hidden">Answer options</legend>
+    </fieldset>
+    <div class="save-status" id="saveStatus" role="status" aria-live="polite"></div>
+    <div class="actions">
+      <div class="group">
+        <button type="button" class="btn btn-review" id="markBtn">Mark for Review &amp; Next</button>
+        <button type="button" class="btn btn-secondary" id="clearBtn">Clear Response</button>
+        <button type="button" class="btn btn-ghost hidden" id="unmarkBtn">Remove review mark</button>
+      </div>
+      <div class="group">
+        <button type="button" class="btn btn-secondary" id="prevBtn">← Previous</button>
+        <button type="button" class="btn btn-primary" id="saveNextBtn">Save &amp; Next →</button>
+      </div>
+    </div>
+  </section>
+
+  <aside class="card palette" id="palette" aria-labelledby="palTitle">
+    <div class="row between">
+      <h2 id="palTitle">Question palette</h2>
+      <button type="button" class="btn btn-ghost btn-sm palette-toggle" id="paletteToggle" aria-expanded="true" aria-controls="paletteBody">Hide</button>
+    </div>
+    <div class="palette-body" id="paletteBody">
+      <div class="legend" id="legend"></div>
+      <div id="paletteGrid"></div>
+      <p class="away-info" id="awayInfo"></p>
+      <div class="submit-area">
+        <button type="button" class="btn btn-primary" id="submitBtn">Submit Test</button>
+      </div>
+    </div>
+  </aside>
+</main>
+
+<div class="overlay" id="loadingOverlay">
+  <div class="card"><h2>Loading your examination…</h2><p class="muted">Please wait.</p></div>
+</div>
+<div class="overlay hidden" id="blockOverlay" role="alertdialog" aria-modal="true" aria-labelledby="blockTitle" aria-describedby="blockText">
+  <div class="card">
+    <h2 id="blockTitle"></h2>
+    <p id="blockText" class="muted"></p>
+    <div class="row" id="blockActions"></div>
+  </div>
+</div>
+</body>
+</html>
