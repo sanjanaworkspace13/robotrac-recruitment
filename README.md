@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Robotrac Recruitment Portal
 
 A company-level aptitude recruitment portal for **Robotrac**: HR creates recruitment drives, authorises
@@ -336,3 +337,7 @@ The full acceptance-criteria table (PASS / FAIL / NOT VERIFIED) is in
 * HR accounts have a single role (full HR/admin access); there is no separate read-only role yet.
 * The supplied logo image includes its own light-grey background and a tagline that is slightly cropped at
   the left and right edges in the original file; it is reused unchanged.
+=======
+# robotrac-recruitment
+Robotrac Recruitment Management System
+>>>>>>> 8881778e1abcefc941ac696e0de60642d3f75551
